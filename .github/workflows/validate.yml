@@ -1,0 +1,14 @@
+name: Validate Repository
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check required files
+        run: |
+          if [ ! -f "README.md" ]; then exit 1; fi
+          if [ ! -f "LICENSE" ]; then exit 1; fi
+          if [ ! -f "prompts/house_style.md" ]; then exit 1; fi
+          echo "All required files present"
